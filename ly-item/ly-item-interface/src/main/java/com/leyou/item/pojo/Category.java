@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * @Title:
+ * @Title: 商品分类实体类
  * @Description:
  * @Author: vanguard
  * @Version: 1.0

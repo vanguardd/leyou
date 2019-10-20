@@ -20,7 +20,8 @@ public enum  ExceptionEnums {
      * 校验商品价格
      */
     PRICE_CANNOT_BE_NULL(400, "价格不能为空!"),
-    CATEGORY_NOT_FOUND(404, "商品分类不存在！")
+    CATEGORY_NOT_FOUND(404, "商品分类不存在！"),
+    BRAND_NOT_FOUND(404, "品牌不存在！")
     ;
     private Integer code;
     private String message;

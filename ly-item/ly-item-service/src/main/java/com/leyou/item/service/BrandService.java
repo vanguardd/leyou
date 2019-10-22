@@ -31,17 +31,32 @@ public class BrandService {
     public PageResult<Brand> queryPageBrandsBySearch(Integer page, Integer rows, String sortBy, Boolean desc,
                                                       String key) {
         PageHelper.startPage(page, rows);
-        String direction = desc ? "ASC" : "DESC";
-        PageHelper.orderBy(sortBy + " " + direction);
+
         Example example = new Example(Brand.class);
         if(StringUtils.isNotBlank(key)) {
             example.createCriteria().andLike("name", "%" + key + "%")
                     .orEqualTo("letter", key);
+        }
+        if(StringUtils.isNotBlank(sortBy)) {
+            String direction = desc ? "ASC" : "DESC";
+            PageHelper.orderBy(sortBy + " " + direction);
         }
         List<Brand> brands = brandMapper.selectByExample(example);
         if(CollectionUtils.isEmpty(brands)) {
             throw new LyException(ExceptionEnums.BRAND_NOT_FOUND);
         }
         return new PageResult<>(brands);
+    }
+
+    public Brand getBrand(Long bid) {
+        return brandMapper.selectByPrimaryKey(bid);
+    }
+
+    public void insert(Brand brand) {
+        brandMapper.insert(brand);
+    }
+
+    public void update(Brand brand) {
+        brandMapper.updateByPrimaryKey(brand);
     }
 }

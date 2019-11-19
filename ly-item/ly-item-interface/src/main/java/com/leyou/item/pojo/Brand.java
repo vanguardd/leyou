@@ -3,10 +3,8 @@ package com.leyou.item.pojo;
 import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * @Title: 品牌实体类
@@ -25,5 +23,9 @@ public class Brand {
     private String name;
     /** 品牌图片 */
     private String image;
+    /** 品牌首字母 */
     private Character letter;
+
+    @Transient
+    private String cids;
 }

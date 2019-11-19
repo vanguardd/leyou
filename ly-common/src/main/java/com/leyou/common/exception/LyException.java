@@ -1,4 +1,4 @@
-package com.leyou.common;
+package com.leyou.common.exception;
 
 import com.leyou.common.enums.ExceptionEnums;
 import lombok.AllArgsConstructor;

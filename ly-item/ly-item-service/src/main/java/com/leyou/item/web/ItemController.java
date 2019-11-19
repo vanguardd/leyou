@@ -1,6 +1,6 @@
 package com.leyou.item.web;
 
-import com.leyou.common.LyException;
+import com.leyou.common.exception.LyException;
 import com.leyou.common.enums.ExceptionEnums;
 import com.leyou.item.pojo.Item;
 import com.leyou.item.service.ItemService;

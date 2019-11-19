@@ -1,6 +1,6 @@
 package com.leyou.item.service;
 
-import com.leyou.common.LyException;
+import com.leyou.common.exception.LyException;
 import com.leyou.common.enums.ExceptionEnums;
 import com.leyou.item.mapper.CategoryMapper;
 import com.leyou.item.pojo.Category;
@@ -23,7 +23,7 @@ public class CategoryService {
     @Autowired
     private CategoryMapper categoryMapper;
 
-    public List<Category> queryListByParent(Long pid) {
+    public List<Category> queryListByParentId(Long pid) {
         Category category = new Category();
         category.setParentId(pid);
         List<Category> categoryList = this.categoryMapper.select(category);
@@ -33,4 +33,7 @@ public class CategoryService {
         return categoryList;
     }
 
+    public List<Category> queryByBrandId(Long bid) {
+        return null;
+    }
 }

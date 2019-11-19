@@ -1,11 +1,15 @@
 package com.leyou.item.web;
 
-import com.leyou.common.pojo.PageResult;
+import com.leyou.common.vo.PageResult;
 import com.leyou.item.pojo.Brand;
 import com.leyou.item.service.BrandService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Title: 品牌相关接口
@@ -28,7 +32,7 @@ public class BrandController {
      * @param sortBy
      * @param desc
      * @param key
-     * @return org.springframework.http.ResponseEntity<com.leyou.common.pojo.PageResult<com.leyou.item.pojo.Brand>>
+     * @return org.springframework.http.ResponseEntity<com.leyou.common.vo.PageResult<com.leyou.item.pojo.Brand>>
      * @author vanguard
      * @date 19/10/21 21:38
      */
@@ -64,9 +68,9 @@ public class BrandController {
      * @date 19/10/21 21:39
      */
     @PostMapping()
-    public ResponseEntity<Brand> insert(@RequestBody Brand brand) {
+    public ResponseEntity<Void> insert(@RequestBody Brand brand) {
         brandService.insert(brand);
-        return ResponseEntity.ok(brand);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     /**

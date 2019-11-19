@@ -1,13 +1,11 @@
 package com.leyou.item.web;
 
+import com.leyou.item.pojo.Brand;
 import com.leyou.item.pojo.Category;
 import com.leyou.item.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,7 +32,14 @@ public class CategoryController {
      */
     @GetMapping("list")
     public ResponseEntity<List<Category>> queryByParentId(@RequestParam("pid") Long pid) {
-        List<Category> categoryList = categoryService.queryListByParent(pid);
+        List<Category> categoryList = categoryService.queryListByParentId(pid);
         return ResponseEntity.ok(categoryList);
     }
+
+    @GetMapping("bid/{bid}")
+    public ResponseEntity<List<Category>> queryByBid(@PathVariable("bid") Long bid) {
+        List<Category> categoryList =  categoryService.queryByBrandId(bid);
+        return ResponseEntity.ok(categoryList);
+    }
+
 }

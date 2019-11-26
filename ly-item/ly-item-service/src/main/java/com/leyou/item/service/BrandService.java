@@ -5,7 +5,9 @@ import com.leyou.common.exception.LyException;
 import com.leyou.common.enums.ExceptionEnums;
 import com.leyou.common.vo.PageResult;
 import com.leyou.item.mapper.BrandMapper;
+import com.leyou.item.mapper.CategoryMapper;
 import com.leyou.item.pojo.Brand;
+import com.leyou.item.pojo.Category;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,9 @@ public class BrandService {
 
     @Autowired
     private BrandMapper brandMapper;
+
+    @Autowired
+    private CategoryMapper categoryMapper;
 
     public PageResult<Brand> queryPageBrandsBySearch(Integer page, Integer rows, String sortBy, Boolean desc,
                                                       String key) {
@@ -71,5 +76,13 @@ public class BrandService {
 
     public void update(Brand brand) {
         brandMapper.updateByPrimaryKey(brand);
+        String[] cids = brand.getCids().split(",");
+        for(String cid : cids) {
+            Category category = categoryMapper.queryByBrandIdAndCategoryId(brand.getId(), Long.valueOf(cid));
+            //如果该品牌没有该分类则保存品牌和分类关系
+            if(category == null) {
+                brandMapper.insertCategoryBrand(Long.valueOf(cid), brand.getId());
+            }
+        }
     }
 }

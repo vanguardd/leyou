@@ -36,11 +36,12 @@ public class BrandService {
                                                       String key) {
         //分页
         PageHelper.startPage(page, rows);
+        //排序
         if(StringUtils.isNotBlank(sortBy)) {
             String direction = desc ? "DESC" : "ASC";
             PageHelper.orderBy(sortBy + " " + direction);
         }
-        //排序
+        //过滤
         Example example = new Example(Brand.class);
         if(StringUtils.isNotBlank(key)) {
             example.createCriteria().andLike("name", "%" + key + "%")
@@ -56,7 +57,11 @@ public class BrandService {
     }
 
     public Brand getBrand(Long bid) {
-        return brandMapper.selectByPrimaryKey(bid);
+        Brand brand = brandMapper.selectByPrimaryKey(bid);
+        if(brand == null) {
+            throw new LyException(ExceptionEnums.BRAND_NOT_FOUND);
+        }
+        return brand;
     }
 
     public void insert(Brand brand) {

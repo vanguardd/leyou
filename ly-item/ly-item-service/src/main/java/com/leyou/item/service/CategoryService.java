@@ -36,4 +36,12 @@ public class CategoryService {
     public List<Category> queryByBrandId(Long bid) {
         return categoryMapper.queryByBrandId(bid);
     }
+
+    public List<Category> getByIds(List<Long> ids) {
+        List<Category> categoryList = categoryMapper.selectByIdList(ids);
+        if(CollectionUtils.isEmpty(categoryList)) {
+            throw new LyException(ExceptionEnums.CATEGORY_NOT_FOUND);
+        }
+        return categoryList;
+    }
 }

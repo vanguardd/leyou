@@ -36,6 +36,13 @@ public class CategoryController {
         return ResponseEntity.ok(categoryList);
     }
 
+    /**
+     * 根据品牌Id查询品牌所属的分类
+     * @param bid 品牌Id
+     * @return org.springframework.http.ResponseEntity<java.util.List<com.leyou.item.pojo.Category>>
+     * @author vanguard
+     * @date 19/12/9 20:48
+     */
     @GetMapping("bid/{bid}")
     public ResponseEntity<List<Category>> queryByBid(@PathVariable("bid") Long bid) {
         List<Category> categoryList =  categoryService.queryByBrandId(bid);

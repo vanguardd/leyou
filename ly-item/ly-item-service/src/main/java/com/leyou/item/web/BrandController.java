@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 /**
  * @Title: 品牌相关接口
@@ -82,5 +84,18 @@ public class BrandController {
     public ResponseEntity<Brand> update(@RequestBody Brand brand) {
         brandService.update(brand);
         return ResponseEntity.ok(brand);
+    }
+
+    /**
+     * 根据商品分类id查询品牌集合
+     * @param cid
+     * @return org.springframework.http.ResponseEntity<java.util.List<com.leyou.item.pojo.Brand>>
+     * @author vanguard
+     * @date 20/1/2 20:34
+     */
+    @GetMapping("/cid/{cid}")
+    public ResponseEntity<List<Brand>> getBrandsByCid(@PathVariable("cid") Long cid) {
+        List<Brand> brandList = brandService.getBrandsByCid(cid);
+        return ResponseEntity.ok(brandList);
     }
 }

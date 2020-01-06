@@ -90,4 +90,13 @@ public class BrandService {
             }
         }
     }
+
+    public List<Brand> getBrandsByCid(Long cid) {
+        List<Brand> brandList = brandMapper.selectBrandsByCid(cid);
+        if(CollectionUtils.isEmpty(brandList)) {
+            throw new LyException(ExceptionEnums.BRAND_NOT_FOUND);
+        }
+        return brandList;
+
+    }
 }

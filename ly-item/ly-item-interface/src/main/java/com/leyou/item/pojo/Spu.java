@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Title:
@@ -44,4 +45,16 @@ public class Spu {
      */
     @Transient
     private String bname;
+
+    /**
+     * 特有属性集合
+     */
+    @Transient
+    private List<Sku> skus;
+
+    /**
+     * 通用属性详情
+     */
+    @Transient
+    private SpuDetail spuDetail;
 }

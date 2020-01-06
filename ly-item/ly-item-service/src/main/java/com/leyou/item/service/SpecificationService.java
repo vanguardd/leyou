@@ -45,9 +45,21 @@ public class SpecificationService {
         return specGroupList;
     }
 
-    public List<SpecParam> getSpecParamsByGroupId(Long gid) {
+    /**
+     * 根据条件查询规格参数
+     * @param gid 规格参数组id
+     * @param cid 分类Id
+     * @param generic 是否通用属性
+     * @param searching 是否可搜索
+     * @return java.util.List<com.leyou.item.pojo.SpecParam>
+     * @author vanguard
+     * @date 20/1/2 20:44
+     */
+    public List<SpecParam> getSpecParams(Long gid, Long cid, Boolean generic, Boolean searching) {
         SpecParam specParam = new SpecParam();
         specParam.setGroupId(gid);
+        specParam.setGeneric(generic);
+        specParam.setSearching(searching);
         List<SpecParam> specParamList = specParamMapper.select(specParam);
         if(CollectionUtils.isEmpty(specParamList)) {
             throw new LyException(ExceptionEnums.SPEC_PARAM_NOT_FOUND);

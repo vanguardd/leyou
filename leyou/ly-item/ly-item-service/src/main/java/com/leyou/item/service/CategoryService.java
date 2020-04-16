@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,5 +44,12 @@ public class CategoryService {
             throw new LyException(ExceptionEnums.CATEGORY_NOT_FOUND);
         }
         return categoryList;
+    }
+
+    public List<String> queryNamesByIds(List<Long> ids) {
+        List<Category> categoryList = getByIds(ids);
+        List<String> categoryNames = new ArrayList<>();
+        categoryList.forEach(category -> categoryNames.add(category.getName()));
+        return categoryNames;
     }
 }

@@ -9,8 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.leyou</groupId>
+    <groupId>com.leyou.upload</groupId>
     <artifactId>ly-upload</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>

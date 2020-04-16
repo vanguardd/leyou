@@ -49,4 +49,17 @@ public class CategoryController {
         return ResponseEntity.ok(categoryList);
     }
 
+    /**
+     * 根据商品分类id集合查询商品分类名称集合
+     * @param ids
+     * @return org.springframework.http.ResponseEntity<java.util.List<java.lang.String>>
+     * @author vanguard
+     * @date 2020/4/16 16:02
+     */
+    @GetMapping("names")
+    public ResponseEntity<List<String>> queryNamesByIds(@RequestParam("id") List<Long> ids) {
+        List<String> names = categoryService.queryNamesByIds(ids);
+        return ResponseEntity.ok(names);
+    }
+
 }

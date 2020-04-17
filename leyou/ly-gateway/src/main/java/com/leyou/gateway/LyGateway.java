@@ -5,7 +5,7 @@ import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 /**
- * @Title:
+ * @Title: 网关服务启动类
  * @Description:
  * @Author: vanguard
  * @Version: 1.0

@@ -1,6 +1,7 @@
 package com.leyou.search.client;
 
 import com.leyou.item.api.SpecificationApi;
+import org.springframework.cloud.openfeign.FeignClient;
 
 /**
  * @title: 商品服务规格参数client
@@ -9,5 +10,6 @@ import com.leyou.item.api.SpecificationApi;
  * @version: 1.0
  * @date: 2020/04/16
  */
+@FeignClient(value = "item-service")
 public interface SpecificationClient extends SpecificationApi {
 }

@@ -1,4 +1,4 @@
-package com.leyou.item.web;
+package com.leyou.item.controller;
 
 import com.leyou.common.vo.PageResult;
 import com.leyou.item.pojo.Sku;

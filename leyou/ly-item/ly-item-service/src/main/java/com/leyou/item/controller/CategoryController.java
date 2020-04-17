@@ -1,6 +1,5 @@
-package com.leyou.item.web;
+package com.leyou.item.controller;
 
-import com.leyou.item.pojo.Brand;
 import com.leyou.item.pojo.Category;
 import com.leyou.item.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

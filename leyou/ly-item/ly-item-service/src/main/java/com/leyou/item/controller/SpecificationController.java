@@ -1,4 +1,4 @@
-package com.leyou.item.web;
+package com.leyou.item.controller;
 
 import com.leyou.item.pojo.SpecGroup;
 import com.leyou.item.pojo.SpecParam;

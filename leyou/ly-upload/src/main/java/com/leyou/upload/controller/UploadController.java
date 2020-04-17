@@ -1,4 +1,4 @@
-package com.leyou.upload.web;
+package com.leyou.upload.controller;
 
 import com.leyou.upload.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * @Title:
+ * @Title: 上传相关接口
  * @Description:
  * @Author: vanguard
  * @Version: 1.0

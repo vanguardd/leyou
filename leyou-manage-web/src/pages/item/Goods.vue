@@ -132,7 +132,7 @@
     methods: {
       getDataFromServer() { // 从服务的加载数的方法。
         // 发起请求
-        this.$http.get("/item/spu/page", {
+        this.$http.get("/item/goods/spu/page", {
           params: {
             key: this.filter.search, // 搜索条件
             saleable: this.filter.saleable === 0 ? null : this.filter.saleable, // 上下架
@@ -156,8 +156,8 @@
       },
       async editGoods(oldGoods) {
         // 发起请求，查询商品详情和skus
-        oldGoods.spuDetail = await this.$http.loadData("/item/spu/detail/" + oldGoods.id);
-        oldGoods.skus = await this.$http.loadData("/item/sku/list?id=" + oldGoods.id);
+        oldGoods.spuDetail = await this.$http.loadData("/item/goods/spu/detail/" + oldGoods.id);
+        oldGoods.skus = await this.$http.loadData("/item/goods/sku/list?id=" + oldGoods.id);
         // 修改标记
         this.isEdit = true;
         // 控制弹窗可见：

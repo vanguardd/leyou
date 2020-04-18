@@ -1,5 +1,6 @@
 package com.leyou.item.api;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,5 +23,6 @@ public interface CategoryApi {
      * @author vanguard
      * @date 2020/4/16 16:02
      */
+    @GetMapping("names")
     List<String> queryNamesByIds(@RequestParam("id") List<Long> ids);
 }

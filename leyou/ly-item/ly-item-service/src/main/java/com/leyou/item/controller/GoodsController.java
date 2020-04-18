@@ -21,7 +21,7 @@ import java.util.List;
  * @Date: 2019/12/17
  */
 @RestController
-@RequestMapping("")
+@RequestMapping("goods")
 public class GoodsController {
 
     @Autowired
@@ -54,7 +54,7 @@ public class GoodsController {
      * @author vanguard
      * @date 20/1/6 21:35
      */
-    @PostMapping("/goods")
+    @PostMapping("")
     public ResponseEntity<Void> insert(@RequestBody Spu spu) {
         goodsService.insert(spu);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -67,7 +67,7 @@ public class GoodsController {
      * @author vanguard
      * @date 20/1/6 21:35
      */
-    @PutMapping("/goods")
+    @PutMapping("")
     public ResponseEntity<Void> update(@RequestBody Spu spu) {
         goodsService.update(spu);
         return ResponseEntity.status(HttpStatus.CREATED).build();

@@ -79,7 +79,9 @@ const lyTop = {
     },
     methods: {
         search() {
-            window.location = 'search.html?key=' + this.key;
+            if(this.key != null && this.key != "") {
+                window.location = 'search.html?key=' + this.key;
+            }
         },
         getUrlParam: function (name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");

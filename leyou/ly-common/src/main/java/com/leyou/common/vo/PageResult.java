@@ -29,6 +29,12 @@ public class PageResult<T> {
         this.totalPage = pageInfo.getPages();
     }
 
+    public PageResult(Long total, Integer totalPage, List<T> items) {
+        this.total = total;
+        this.totalPage = totalPage;
+        this.items = items;
+    }
+
     public PageResult(List<T> items) {
         this(new PageInfo<>(items));
     }

@@ -3,6 +3,8 @@ package com.leyou.common.vo;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -13,7 +15,7 @@ import java.util.List;
  * @Version: 1.0
  * @Date: 2019/10/16
  */
-@Data
+@Getter@Setter
 public class PageResult<T> {
     /** 总条数 */
     private Long total;
@@ -23,10 +25,17 @@ public class PageResult<T> {
 
     private List<T> items;
 
-    private PageResult(PageInfo<T> pageInfo) {
+    public PageResult() {}
+
+    public PageResult(PageInfo<T> pageInfo) {
         this.items = pageInfo.getList();
         this.total = pageInfo.getTotal();
         this.totalPage = pageInfo.getPages();
+    }
+
+    public PageResult(Long total, List<T> items) {
+        this.total = total;
+        this.items = items;
     }
 
     public PageResult(Long total, Integer totalPage, List<T> items) {

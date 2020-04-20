@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @title: 分类API
@@ -25,4 +26,14 @@ public interface CategoryApi {
      */
     @GetMapping("names")
     List<String> queryNamesByIds(@RequestParam("id") List<Long> ids);
+
+    /**
+     * 根据商品分类id查询商品分类id和商品分类name Map的集合
+     * @param ids
+     * @return java.util.List<java.util.Map<java.lang.Long,java.lang.Object>>
+     * @author vanguard
+     * @date 20/4/20 18:38
+     */
+    @GetMapping("id/names/list")
+    List<Map<String, Object>> queryNameMapByIds(@RequestParam("id") List<Long> ids);
 }

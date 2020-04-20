@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Title: 商品分类接口
@@ -59,6 +60,19 @@ public class CategoryController {
     public ResponseEntity<List<String>> queryNamesByIds(@RequestParam("id") List<Long> ids) {
         List<String> names = categoryService.queryNamesByIds(ids);
         return ResponseEntity.ok(names);
+    }
+
+    /**
+     * 根据商品分类id查询商品分类id和商品分类name Map的集合
+     * @param ids
+     * @return java.util.List<java.util.Map<java.lang.Long,java.lang.Object>>
+     * @author vanguard
+     * @date 20/4/20 18:38
+     */
+    @GetMapping("id/names/list")
+    public ResponseEntity<List<Map<String, Object>>> queryNameMapByIds(@RequestParam("id") List<Long> ids) {
+        List<Map<String, Object>> idNames = categoryService.queryIdNameMapsByIds(ids);
+        return ResponseEntity.ok(idNames);
     }
 
 }

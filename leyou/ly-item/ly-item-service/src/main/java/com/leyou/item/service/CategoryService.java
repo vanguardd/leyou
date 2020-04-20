@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @Title: 商品分类业务层
@@ -51,5 +54,17 @@ public class CategoryService {
         List<String> categoryNames = new ArrayList<>();
         categoryList.forEach(category -> categoryNames.add(category.getName()));
         return categoryNames;
+    }
+
+    public List<Map<String, Object>> queryIdNameMapsByIds(List<Long> ids) {
+        List<Category> categories = getByIds(ids);
+        List<Map<String, Object>> idNameMaps = new ArrayList<>();
+        categories.forEach(category -> {
+            Map<String, Object> idNameMap = new HashMap<>();
+            idNameMap.put("id", category.getId());
+            idNameMap.put("name", category.getName());
+            idNameMaps.add(idNameMap);
+        });
+        return idNameMaps;
     }
 }

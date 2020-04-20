@@ -276,20 +276,23 @@
             <div class="sui-navbar">
                 <div class="navbar-inner filter">
                     <ul class="sui-nav">
-                        <li class="active">
+                        <li :class="{active: !search.sortBy}" @click="search.sortBy=''">
                             <a href="#">综合</a>
                         </li>
                         <li>
                             <a href="#">销量</a>
                         </li>
-                        <li>
+                        <li :class="{active: search.sortBy==='createTime'}" @click="search.sortBy='createTime'">
                             <a href="#">新品</a>
                         </li>
                         <li>
                             <a href="#">评价</a>
                         </li>
-                        <li>
-                            <a href="#">价格</a>
+                        <li :class="{active: search.sortBy==='price'}" @click="search.sortBy='price'; search.descending = !search.descending">
+                            <a href="#">价格
+                                <v-icon v-show="search.descending">arrow_drop_down</v-icon>
+                                <v-icon v-show="!search.descending">arrow_drop_up</v-icon>
+                            </a>
                         </li>
                     </ul>
                     <div class="top-pagination">
@@ -454,7 +457,9 @@
             ly,
             search: {
                 key: "", //搜索页面的关键字
-                page: 1
+                page: 1, //当前页
+                sortBy: "", //排序字段
+                descending: true, //是否降序
             },
             page: "", //输入框绑定的页数
             goodsList: [], //接收搜索得到的结果
@@ -471,7 +476,12 @@
             }
             // 将请求参数转为对象
             const search = ly.parse(location.search.substring(1));
+            //对当前页进行初始化，防止为空
             search.page = search.page ? parseInt(search.page) : 1;
+            //对排序字段进行初始化，默认为""，代表不排序
+            search.sortBy = search.sortBy || "";
+            //对是否降序进行初始化，转为布尔值
+            search.descending = search.descending == "true" || false;
             // 记录在data的search对象中
             this.search = search;
             

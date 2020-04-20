@@ -1,6 +1,6 @@
 package com.leyou.search.client;
 
-import com.leyou.LySearchApplication;
+import com.leyou.LySearchService;
 import com.leyou.common.vo.PageResult;
 import com.leyou.item.pojo.Spu;
 import com.leyou.search.pojo.Goods;
@@ -13,12 +13,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = LySearchApplication.class)
+@SpringBootTest(classes = LySearchService.class)
 public class ElasticsearchTest {
 
     @Autowired

@@ -15,8 +15,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @EnableFeignClients
 @SpringBootApplication
-public class LySearchApplication {
+public class LySearchService {
     public static void main(String[] args) {
-        SpringApplication.run(LySearchApplication.class);
+        SpringApplication.run(LySearchService.class);
     }
 }

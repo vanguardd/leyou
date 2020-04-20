@@ -8,6 +8,8 @@ import com.leyou.search.repository.GoodsRepository;
 import org.apache.commons.lang.StringUtils;
 import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -48,7 +50,7 @@ public class SearchService {
         NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
 
         // 1. 对key进行全文检索查询
-        queryBuilder.withQuery(QueryBuilders.matchQuery("all", key).operator(Operator.AND));
+        queryBuilder.withQuery(QueryBuilders.fuzzyQuery("all", key));
 
         // 2. 通过sourceFilter设置返回的结果字段，我们只需要id、skus、subTitle
         queryBuilder.withSourceFilter(new FetchSourceFilter(new String[]{"id", "skus", "subTitle"}, null));
@@ -58,6 +60,13 @@ public class SearchService {
         int page = searchRequest.getPage();
         int size = searchRequest.getSize();
         queryBuilder.withPageable(PageRequest.of(page - 1, size));
+
+        //4. 排序
+        String sortBy = searchRequest.getSortBy();
+        Boolean desc = searchRequest.getDescending();
+        if(StringUtils.isNotBlank(sortBy)) {
+            queryBuilder.withSort(SortBuilders.fieldSort(sortBy).order(desc ? SortOrder.DESC : SortOrder.ASC));
+        }
 
         // 4, 查询，获取结果
         Page<Goods> goods = goodsRepository.search(queryBuilder.build());

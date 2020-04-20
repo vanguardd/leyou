@@ -1,7 +1,6 @@
 package com.leyou.search.client;
 
-import com.leyou.LySearchApplication;
-import org.antlr.stringtemplate.language.Cat;
+import com.leyou.LySearchService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import java.util.List;
  * @Date: 2020/04/18
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = LySearchApplication.class)
+@SpringBootTest(classes = LySearchService.class)
 public class CategoryClientTest {
 
     @Autowired

@@ -2,6 +2,8 @@ package com.leyou.search.pojo;
 
 import lombok.Data;
 
+import java.util.Map;
+
 /**
  * @Title: 搜索请求参数封装类
  * @Description:
@@ -30,6 +32,11 @@ public class SearchRequest {
      * 是否降序
      */
     private Boolean descending;
+
+    /**
+     * 过滤条件
+     */
+    private Map<String, String> filter;
 
     private static final Integer DEFAULT_SIZE = 20;// 每页大小，不从页面接收，而是固定大小
     private static final Integer DEFAULT_PAGE = 1;// 默认页

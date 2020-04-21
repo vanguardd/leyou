@@ -3,6 +3,7 @@ package com.leyou.item.controller;
 import com.leyou.item.pojo.Category;
 import com.leyou.item.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -73,6 +74,20 @@ public class CategoryController {
     public ResponseEntity<List<Map<String, Object>>> queryNameMapByIds(@RequestParam("id") List<Long> ids) {
         List<Map<String, Object>> idNames = categoryService.queryIdNameMapsByIds(ids);
         return ResponseEntity.ok(idNames);
+    }
+
+    /**
+     * 根据3级分类id，查询1~3级的分类
+     * @param id
+     * @return
+     */
+    @GetMapping("all/level")
+    public ResponseEntity<List<Category>> queryAllByCid3(@RequestParam("id") Long id){
+        List<Category> list = this.categoryService.queryAllByCid3(id);
+        if (list == null || list.size() < 1) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(list);
     }
 
 }

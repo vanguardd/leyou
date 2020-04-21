@@ -28,6 +28,7 @@ import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 import org.springframework.data.elasticsearch.core.query.FetchSourceFilter;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -77,8 +78,9 @@ public class SearchService {
         NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
 
         // 1. 对key进行全文检索查询
-        MatchQueryBuilder basicQuery = QueryBuilders.matchQuery("all", key).operator(Operator.AND);
-        queryBuilder.withQuery(basicQuery);
+        //MatchQueryBuilder basicQuery = QueryBuilders.matchQuery("all", key).operator(Operator.AND);
+        BoolQueryBuilder boolQueryBuilder = buildBooleanQueryBuild(searchRequest);
+        queryBuilder.withQuery(boolQueryBuilder);
 
         // 2. 通过sourceFilter设置返回的结果字段，我们只需要id、skus、subTitle
         queryBuilder.withSourceFilter(new FetchSourceFilter(new String[]{"id", "skus", "subTitle"}, null));
@@ -116,10 +118,42 @@ public class SearchService {
         List<Map<String, Object>> specs = null;
         assert categories != null;
         if(categories.size() == 1) {
-            specs = getParamAggResult((Long)categories.get(0).get("id"), basicQuery);
+            specs = getParamAggResult((Long)categories.get(0).get("id"), boolQueryBuilder);
         }
         return new SearchResult(goodsPage.getContent(), goodsPage.getTotalElements(), goodsPage.getTotalPages(), categories, brands, specs);
 
+    }
+
+    /**
+     * 构建bool查询构建器
+     * @param searchRequest
+     * @return BoolQueryBuilder
+     * @author vanguard
+     * @date 20/4/21 23:19
+     */
+    private BoolQueryBuilder buildBooleanQueryBuild(SearchRequest searchRequest) {
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        //添加基本条件查询
+        boolQueryBuilder.must(QueryBuilders.matchQuery("all", searchRequest.getKey()).operator(Operator.AND));
+        //添加过滤条件
+        if(!CollectionUtils.isEmpty(searchRequest.getFilter())) {
+            for (Map.Entry<String, String> entry : searchRequest.getFilter().entrySet()) {
+
+                String key = entry.getKey();
+                // 如果过滤条件是“品牌”, 过滤的字段名：brandId
+                if (StringUtils.equals("品牌", key)) {
+                    key = "brandId";
+                } else if (StringUtils.equals("分类", key)) {
+                    // 如果是“分类”，过滤字段名：cid3
+                    key = "cid3";
+                } else {
+                    // 如果是规格参数名，过滤字段名：specs.key.keyword
+                    key = "specs." + key + ".keyword";
+                }
+                boolQueryBuilder.filter(QueryBuilders.termQuery(key, entry.getValue()));
+            }
+        }
+        return boolQueryBuilder;
     }
 
     /**

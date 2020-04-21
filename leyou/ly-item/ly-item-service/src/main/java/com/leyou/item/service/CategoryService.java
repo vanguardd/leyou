@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -66,5 +63,12 @@ public class CategoryService {
             idNameMaps.add(idNameMap);
         });
         return idNameMaps;
+    }
+
+    public List<Category> queryAllByCid3(Long id) {
+        Category c3 = categoryMapper.selectByPrimaryKey(id);
+        Category c2 = categoryMapper.selectByPrimaryKey(c3.getParentId());
+        Category c1 = categoryMapper.selectByPrimaryKey(c2.getParentId());
+        return Arrays.asList(c1, c2, c3);
     }
 }

@@ -58,4 +58,14 @@ public interface GoodsApi {
      */
     @GetMapping("/sku/list")
     List<Sku> queryBySpuId(@RequestParam("id") Long spuId);
+
+    /**
+     * 根据spu的id查询spu
+     * @param id
+     * @return org.springframework.http.ResponseEntity<com.leyou.item.pojo.Spu>
+     * @author vanguard
+     * @date 20/4/22 20:21
+     */
+    @GetMapping("spu/{id}")
+    Spu getSpuById(@PathVariable("id") Long id);
 }

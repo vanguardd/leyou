@@ -6,7 +6,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import tk.mybatis.spring.annotation.MapperScan;
 
 /**
- * @Title:
+ * @Title: 商品服务启动类
  * @Description:
  * @Author: vanguard
  * @Version: 1.0

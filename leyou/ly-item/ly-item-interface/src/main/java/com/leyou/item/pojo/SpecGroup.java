@@ -2,10 +2,7 @@ package com.leyou.item.pojo;
 
 import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -25,5 +22,11 @@ public class SpecGroup {
     private Long cid;
 
     private String name;
+
+    /**
+     * 规则下规格参数集合
+     */
+    @Transient
+    private List<SpecParam> params;
 
 }

@@ -235,4 +235,13 @@ public class GoodsService {
             throw new LyException(ExceptionEnums.GOODS_SAVE_ERROR);
         }
     }
+
+    public Spu getSpuById(Long id) {
+
+        Spu spu = spuMapper.selectByPrimaryKey(id);
+        if(spu == null) {
+            throw new LyException(ExceptionEnums.GOODS_NOT_FOUND);
+        }
+        return spu;
+    }
 }

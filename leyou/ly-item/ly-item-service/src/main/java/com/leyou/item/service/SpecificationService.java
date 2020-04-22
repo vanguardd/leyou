@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -66,5 +67,17 @@ public class SpecificationService {
             throw new LyException(ExceptionEnums.SPEC_PARAM_NOT_FOUND);
         }
         return specParamList;
+    }
+
+    public List<SpecGroup> getSpecsByCid(Long cid) {
+
+        List<SpecGroup> specGroups = getSpecGroupByCid(cid);
+        if(CollectionUtils.isEmpty(specGroups)) {
+            throw new LyException(ExceptionEnums.SPEC_GROUP_NOT_FOUND);
+        }
+        specGroups.forEach(specGroup -> {
+            specGroup.setParams(getSpecParams(specGroup.getId(), null, null, null));
+        });
+        return specGroups;
     }
 }

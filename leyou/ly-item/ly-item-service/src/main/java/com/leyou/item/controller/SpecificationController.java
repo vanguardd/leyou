@@ -2,6 +2,7 @@ package com.leyou.item.controller;
 
 import com.leyou.item.pojo.SpecGroup;
 import com.leyou.item.pojo.SpecParam;
+import com.leyou.item.pojo.Spu;
 import com.leyou.item.service.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,19 @@ public class SpecificationController {
     }
 
     /**
+     * 根据分类Id查询规格参数组及组内参数集合
+     * @param cid
+     * @return org.springframework.http.ResponseEntity<java.util.List<com.leyou.item.pojo.SpecGroup>>
+     * @author vanguard
+     * @date 20/4/22 21:14
+     */
+    @GetMapping("{cid}")
+    public ResponseEntity<List<SpecGroup>> getSpecsByCid(@PathVariable("cid") Long cid) {
+        List<SpecGroup> specGroupList = specificationService.getSpecsByCid(cid);
+        return ResponseEntity.ok(specGroupList);
+    }
+
+    /**
      * 根据条件查询规格参数列表集合
      * @param gid 规格参数组id
      * @param cid 分类Id
@@ -56,5 +70,6 @@ public class SpecificationController {
         List<SpecParam> specParamList = specificationService.getSpecParams(gid, cid, generic, searching);
         return ResponseEntity.ok(specParamList);
     }
+
 
 }

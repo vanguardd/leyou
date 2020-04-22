@@ -170,9 +170,7 @@ public class SearchService {
         queryBuilder.withQuery(basicQuery);
         //添加聚合
         List<SpecParam> specParams = specificationClient.getSpecParamsByGroupId(null, id, null, null);
-        specParams.forEach(specParam -> {
-            queryBuilder.addAggregation(AggregationBuilders.terms(specParam.getName()).field("specs." + specParam.getName() + ".keyword"));
-        });
+        specParams.forEach(specParam -> queryBuilder.addAggregation(AggregationBuilders.terms(specParam.getName()).field("specs." + specParam.getName() + ".keyword")));
         //只需要聚合结果集，不需要查询结果集
         queryBuilder.withSourceFilter(new FetchSourceFilter(new String[]{}, null));
         //执行结果集

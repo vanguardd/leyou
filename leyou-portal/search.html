@@ -178,7 +178,7 @@
                         </li>
                     </ul>
                     <div class="top-pagination">
-                        <span>共 <i style="color: #222;">7600+</i> 商品</span>
+                        <span>共 <i style="color: #222;">{{total}}+</i> 商品</span>
                         <span><i style="color: red;">{{search.page}}</i>/{{totalPage}}</span>
                         <a class="btn-arrow" @click="prevPage" style="display: inline-block">&lt;</a>
                         <a class="btn-arrow" @click="nextPage" style="display: inline-block">&gt;</a>
@@ -190,7 +190,7 @@
                     <li class="yui3-u-1-5" v-for="goods in goodsList" :key="goods.id">
                         <div class="list-wrap">
                             <div class="p-img">
-                                <a href="item.html" target="_blank"><img :src="goods.selected.image" height="200"/></a>
+                                <a :href="'item/' +goods.id+'.html'" target="_blank"><img :src="goods.selected.image" height="200"/></a>
                                 <ul class="skus">
                                     <li :class="{selected: sku.id == goods.selected.id}" v-for="sku in goods.skus" :key="sku.id" @mouseOver="goods.selected=sku">
                                         <img :src="sku.image">

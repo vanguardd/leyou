@@ -30,6 +30,10 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.leyou.item</groupId>
             <artifactId>ly-item-interface</artifactId>
             <version>1.0.0-SNAPSHOT</version>

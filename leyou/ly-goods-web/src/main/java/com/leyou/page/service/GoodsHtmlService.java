@@ -76,4 +76,9 @@ public class GoodsHtmlService {
         ExecutorService executorService = ThreadUtils.buildThreadTool(THREAD_SIZE, THREAD_SIZE, THREAD_NAME);
         executorService.submit(() -> createHtml(spuId));
     }
+
+    public void deleteHtml(Long id) {
+        File file = new File(itemHtmlPath, id + ".html");
+        file.deleteOnExit();
+    }
 }

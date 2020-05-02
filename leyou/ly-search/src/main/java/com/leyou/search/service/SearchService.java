@@ -4,14 +4,17 @@ import com.leyou.common.exception.LyException;
 import com.leyou.common.vo.PageResult;
 import com.leyou.item.pojo.Brand;
 import com.leyou.item.pojo.SpecParam;
+import com.leyou.item.pojo.Spu;
 import com.leyou.search.client.BrandClient;
 import com.leyou.search.client.CategoryClient;
+import com.leyou.search.client.GoodsClient;
 import com.leyou.search.client.SpecificationClient;
 import com.leyou.search.pojo.Goods;
 import com.leyou.search.pojo.SearchRequest;
 import com.leyou.search.pojo.SearchResult;
 import com.leyou.search.repository.GoodsRepository;
 import org.apache.commons.lang.StringUtils;
+import org.elasticsearch.index.Index;
 import org.elasticsearch.index.query.*;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
@@ -30,6 +33,7 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,10 +58,16 @@ public class SearchService {
     private CategoryClient categoryClient;
 
     @Autowired
+    private GoodsClient goodsClient;
+
+    @Autowired
     private BrandClient brandClient;
 
     @Autowired
     private SpecificationClient specificationClient;
+
+    @Autowired
+    private IndexService indexService;
 
 
     /**
@@ -248,6 +258,33 @@ public class SearchService {
 //
 //        return brandTerm.getBuckets().stream().map(bucket ->
 //                brandClient.getBrand(bucket.getKeyAsNumber().longValue())).collect(Collectors.toList());
+    }
+
+    /**
+     * 创建商品索引
+     * @param id
+     * @return void
+     * @author vanguard
+     * @date 20/5/2 23:00
+     */
+    public void createIndex(Long id) throws IOException {
+        Spu spu = goodsClient.getSpuById(id);
+        //构建商品
+        Goods goods = indexService.buildGoods(spu);
+
+        //保存数据到索引
+        goodsRepository.save(goods);
+    }
+
+    /**
+     * 删除商品索引
+     * @param id
+     * @return void
+     * @author vanguard
+     * @date 20/5/2 23:01
+     */
+    public void deleteIndex(Long id) {
+        goodsRepository.deleteById(id);
     }
 
 

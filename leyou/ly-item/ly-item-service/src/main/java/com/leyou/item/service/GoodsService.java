@@ -9,7 +9,9 @@ import com.leyou.item.mapper.SpuDetailMapper;
 import com.leyou.item.mapper.SpuMapper;
 import com.leyou.item.mapper.StockMapper;
 import com.leyou.item.pojo.*;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +28,7 @@ import java.util.stream.Collectors;
  * @Version: 1.0
  * @Date: 2019/12/17
  */
+@Slf4j
 @Service
 public class GoodsService {
     @Autowired
@@ -45,6 +48,9 @@ public class GoodsService {
 
     @Autowired
     private StockMapper stockMapper;
+
+    @Autowired
+    private AmqpTemplate amqpTemplate;
 
     public PageResult<Spu> getSpuByPage(Integer page, Integer rows, Boolean saleable, String key) {
         //分页
@@ -109,6 +115,9 @@ public class GoodsService {
         spuDetailMapper.insert(spuDetail);
 
         saveSkuAndStock(spu);
+
+        //发送消息 同步索引
+        sendMessage(spu.getId(), "insert");
 
     }
 
@@ -198,6 +207,8 @@ public class GoodsService {
 
         saveSkuAndStock(spu);
 
+        sendMessage(spu.getId(), "update");
+
     }
 
     /**
@@ -243,5 +254,21 @@ public class GoodsService {
             throw new LyException(ExceptionEnums.GOODS_NOT_FOUND);
         }
         return spu;
+    }
+
+    /**
+     * rabbitMQ发送消息
+     * @param id 商品id
+     * @param type 消息类型
+     * @return void
+     * @author vanguard
+     * @date 20/5/2 22:50
+     */
+    private void sendMessage(Long id, String type) {
+        try {
+            amqpTemplate.convertAndSend("item." + type, id);
+        } catch (Exception e) {
+            log.error("{}商品消息发送异常，商品id{}", type, id, e);
+        }
     }
 }

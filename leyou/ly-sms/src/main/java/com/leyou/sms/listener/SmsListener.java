@@ -1,6 +1,5 @@
 package com.leyou.sms.listener;
 
-import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.leyou.common.util.JsonUtils;
 import com.leyou.sms.config.SmsProperties;
 import com.leyou.sms.utils.SmsUtils;

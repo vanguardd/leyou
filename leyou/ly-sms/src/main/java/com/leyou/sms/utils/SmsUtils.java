@@ -57,11 +57,10 @@ public class SmsUtils {
 
     public SendSmsResponse sendSms(String phoneNumber, String templateParam, String signName, String template) {
         String key = KEY_PREFIX + phoneNumber;
-        //TODO 按照手机号限流
-        //读取时间
+        //按照手机号限流
+        //读取上一次发送短信的时间
         String lastTime = redisTemplate.opsForValue().get(key);
-        if(StringUtils.isNoneBlank(lastTime)) {
-            assert lastTime != null;
+        if(StringUtils.isNotBlank(lastTime)) {
             long last = Long.parseLong(lastTime);
             if(System.currentTimeMillis() - last < SMS_MIN_INTERVAL_IN_MILLTS) {
                 return null;

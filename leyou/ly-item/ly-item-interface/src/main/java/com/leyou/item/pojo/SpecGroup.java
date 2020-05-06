@@ -1,6 +1,7 @@
 package com.leyou.item.pojo;
 
 import lombok.Data;
+import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 @Table(name = "tb_spec_group")
 public class SpecGroup {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @KeySql(useGeneratedKeys=true)
     private Long id;
 
     private Long cid;

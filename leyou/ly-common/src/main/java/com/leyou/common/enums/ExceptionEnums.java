@@ -31,8 +31,10 @@ public enum  ExceptionEnums {
     UPLOAD_FILE_ERROR(500, "上传文件失败！"),
     GOODS_SAVE_ERROR(500, "商品保存失败！"),
     GOODS_UPDATE_ERROR(500, "商品更新失败！"),
+    SEND_VERIFY_CODE_FAILED(500, "发送验证码失败！"),
     INVALID_FILE_TYPE(400, "无效的文件类型"),
     GOODS_ID_CANNOT_BE_NULL(400, "商品id不能为空！"),
+    INVALID_CHECK_DATA_TYPE(400, "数据校验参数有误"),
     ;
     private Integer code;
     private String message;

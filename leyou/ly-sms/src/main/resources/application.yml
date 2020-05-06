@@ -10,7 +10,7 @@ spring:
     virtual-host: /leyou
   redis:
     host: 192.168.25.128
-leyou:
+ly:
   sms:
     accessKeyId: JWffwFJIwada # 你自己的accessKeyId
     accessKeySecret: aySRliswq8fe7rF9gQyy1Izz4MQ # 你自己的AccessKeySecret

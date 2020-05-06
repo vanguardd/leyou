@@ -1,6 +1,7 @@
 package com.leyou.item.pojo;
 
 import lombok.Data;
+import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,7 +10,7 @@ import java.util.Date;
 @Table(name = "tb_sku")
 public class Sku {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @KeySql(useGeneratedKeys=true)
     private Long id;
     private Long spuId;
     private String title;

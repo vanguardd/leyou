@@ -41,12 +41,12 @@
         <dependency>
             <groupId>com.leyou.user</groupId>
             <artifactId>ly-user-interface</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${leyou.latest.version}</version>
         </dependency>
         <dependency>
             <groupId>com.leyou.common</groupId>
             <artifactId>ly-common</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${leyou.latest.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

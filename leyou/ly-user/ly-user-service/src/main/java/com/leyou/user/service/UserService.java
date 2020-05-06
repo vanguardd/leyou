@@ -51,6 +51,7 @@ public class UserService {
      */
     public Boolean checkData(String data, Integer type) {
         User record = new User();
+        // 判断校验类型
         switch (type) {
             case 1:
                 record.setUsername(data);

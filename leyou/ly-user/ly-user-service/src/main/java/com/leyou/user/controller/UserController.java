@@ -46,7 +46,7 @@ public class UserController {
     @PostMapping("code")
     public ResponseEntity<Void> sendVerifyCode(String phone) {
         userService.sendVerifyCode(phone);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     /**

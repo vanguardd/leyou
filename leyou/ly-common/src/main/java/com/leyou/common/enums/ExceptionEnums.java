@@ -20,6 +20,11 @@ public enum  ExceptionEnums {
      * 校验商品价格
      */
     PRICE_CANNOT_BE_NULL(400, "价格不能为空!"),
+    INVALID_FILE_TYPE(400, "无效的文件类型"),
+    GOODS_ID_CANNOT_BE_NULL(400, "商品id不能为空！"),
+    INVALID_CHECK_DATA_TYPE(400, "数据校验参数有误"),
+    USERNAME_OR_PASSWORD_ERROR(400, "用户名或密码错误"),
+    USER_REGISTER_VERIFY_CODE_ERR(401, "验证码不正确！"),
     CATEGORY_NOT_FOUND(404, "商品分类不存在！"),
     BRAND_NOT_FOUND(404, "品牌不存在！"),
     SPEC_GROUP_NOT_FOUND(404, "规格参数组不存在！"),
@@ -32,9 +37,7 @@ public enum  ExceptionEnums {
     GOODS_SAVE_ERROR(500, "商品保存失败！"),
     GOODS_UPDATE_ERROR(500, "商品更新失败！"),
     SEND_VERIFY_CODE_FAILED(500, "发送验证码失败！"),
-    INVALID_FILE_TYPE(400, "无效的文件类型"),
-    GOODS_ID_CANNOT_BE_NULL(400, "商品id不能为空！"),
-    INVALID_CHECK_DATA_TYPE(400, "数据校验参数有误"),
+
     ;
     private Integer code;
     private String message;

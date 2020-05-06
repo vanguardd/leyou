@@ -1,13 +1,13 @@
 package com.leyou.user.controller;
 
+import com.leyou.user.pojo.User;
 import com.leyou.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * @Title: 用户接口
@@ -47,5 +47,26 @@ public class UserController {
     public ResponseEntity<Void> sendVerifyCode(String phone) {
         userService.sendVerifyCode(phone);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    /**
+     * 用户注册
+     * @param user 注册用户信息
+     * @param code 验证码
+     * @return org.springframework.http.ResponseEntity<java.lang.Void>
+     * @author vanguard
+     * @date 20/5/6 20:36
+     */
+    @PostMapping("register")
+    public ResponseEntity<Void> register(@Valid User user, @RequestParam("code") String code) {
+        userService.register(user, code);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping("query")
+    public ResponseEntity<User> query(@RequestParam("username") String username,
+                                      @RequestParam("password") String password) {
+        User user = userService.queryUser(username, password);
+        return ResponseEntity.ok(user);
     }
 }

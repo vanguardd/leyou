@@ -28,6 +28,7 @@ export default new Router({
         route("/item/list",'/item/Goods',"Goods"),
         route("/item/specification",'/item/specification/Specification',"Specification"),
         route("/user/statistics",'/item/Statistics',"Statistics"),
+        route("/user/list", "/user/list", "List"),
         route("/trade/promotion",'/trade/Promotion',"Promotion")
       ]
     }

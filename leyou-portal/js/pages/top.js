@@ -15,7 +15,7 @@ const lyTop = {
                                 <!--searchAutoComplete--> \
                                 <div class='input-append'> \
                                     <input type='text' id='autocomplete' v-model='key' \
-                                           class='input-error input-xxlarge'/> \
+                                           class='input-error input-xxlarge' @keyup.enter.native='search'/> \
                                     <button @click='search' class='sui-btn btn-xlarge btn-danger' type='button'>搜索</button> \
                                 </div> \
                             </form> \

@@ -1,4 +1,4 @@
-package com.leyou.common.util;
+package com.leyou.common.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;

@@ -1,6 +1,6 @@
 package com.leyou.sms.listener;
 
-import com.leyou.common.util.JsonUtils;
+import com.leyou.common.utils.JsonUtils;
 import com.leyou.sms.config.SmsProperties;
 import com.leyou.sms.utils.SmsUtils;
 import lombok.extern.slf4j.Slf4j;

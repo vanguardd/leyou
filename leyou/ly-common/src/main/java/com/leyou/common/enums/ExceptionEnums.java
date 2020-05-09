@@ -37,6 +37,8 @@ public enum  ExceptionEnums {
     GOODS_SAVE_ERROR(500, "商品保存失败！"),
     GOODS_UPDATE_ERROR(500, "商品更新失败！"),
     SEND_VERIFY_CODE_FAILED(500, "发送验证码失败！"),
+    USER_LOGIN_ERROR(500, "用户登录失败，请稍后重试！"),
+    USER_VERIFY_ERROR(500, "用户信息校验失败，请稍后重试！"),
 
     ;
     private Integer code;

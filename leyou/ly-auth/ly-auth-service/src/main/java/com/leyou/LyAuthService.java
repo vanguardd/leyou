@@ -4,19 +4,20 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import tk.mybatis.spring.annotation.MapperScan;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
- * @Title: 用户服务启动类
+ * @Title: 授权服务启动类
  * @Description:
  * @Author: vanguard
  * @Version: 1.0
- * @Date: 2020/05/06
+ * @Date: 2020/05/08
  */
+@EnableFeignClients
 @SpringCloudApplication
-@MapperScan("com.leyou.user.mapper")
-public class LyUserService {
+public class LyAuthService {
+
     public static void main(String[] args) {
-        SpringApplication.run(LyUserService.class, args);
+        SpringApplication.run(LyAuthService.class, args);
     }
 }

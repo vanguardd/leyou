@@ -13,7 +13,6 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @Date: 2019/09/24
  */
 @SpringCloudApplication
-@EnableDiscoveryClient
 @MapperScan("com.leyou.item.mapper")
 public class LyItemService {
     public static void main(String[] args) {

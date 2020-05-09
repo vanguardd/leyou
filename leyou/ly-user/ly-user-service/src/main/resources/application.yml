@@ -24,6 +24,12 @@ eureka:
     lease-expiration-duration-in-seconds: 15
     ip-address: 127.0.0.1
     prefer-ip-address: true
-
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMillisecond: 5000 # 熔断超时时长：10000ms
 mybatis:
   type-aliases-package: com.leyou.user.pojo

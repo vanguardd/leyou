@@ -23,6 +23,9 @@ zuul:
       strip-prefix: false
     search-service: /search/**  # 搜索微服务
     user-service: /user/** # 用户微服务
+    auth-service: /auth/** # 授权中心服务
+  add-host-header: true # 携带请求本身的head头信息
+  sensitive-headers:  # 配置禁止使用的头信息，这里设置为null，否则set-cookie无效
 ribbon:
   ConnectTimeout: 1000 # 连接超时时间(ms)
   ReadTimeout: 3500 # 通信超时时间(ms)

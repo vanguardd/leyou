@@ -1,7 +1,7 @@
 package com.leyou.search.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.leyou.common.util.JsonUtils;
+import com.leyou.common.utils.JsonUtils;
 import com.leyou.item.pojo.*;
 import com.leyou.search.client.BrandClient;
 import com.leyou.search.client.CategoryClient;

@@ -63,9 +63,18 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    /**
+     * 根据用户名和密码查询用户信息
+     * @param username
+     * @param password
+     * @return com.leyou.user.pojo.User
+     * @author vanguard
+     * @date 20/5/9 20:38
+     */
     @GetMapping("query")
-    public ResponseEntity<User> query(@RequestParam("username") String username,
-                                      @RequestParam("password") String password) {
+    public ResponseEntity<User> queryUser(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password) {
         User user = userService.queryUser(username, password);
         return ResponseEntity.ok(user);
     }

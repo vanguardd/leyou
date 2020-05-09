@@ -1,10 +1,9 @@
 package com.leyou.user.service;
 
-import com.leyou.LyUserService;
 import com.leyou.common.enums.ExceptionEnums;
 import com.leyou.common.exception.LyException;
-import com.leyou.common.util.CodecUtils;
-import com.leyou.common.util.NumberUtils;
+import com.leyou.common.utils.CodecUtils;
+import com.leyou.common.utils.NumberUtils;
 import com.leyou.user.mapper.UserMapper;
 import com.leyou.user.pojo.User;
 import lombok.extern.slf4j.Slf4j;

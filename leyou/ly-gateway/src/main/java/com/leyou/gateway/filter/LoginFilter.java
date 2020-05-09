@@ -13,12 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @Title:
- * @Description:
+ * @Title: 网关拦截
+ * @Description: 登录网关接口拦截
  * @Author: vanguard
  * @Version: 1.0
  * @Date: 2020/05/09

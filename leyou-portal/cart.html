@@ -46,7 +46,7 @@
                         <div class="cart-list">
                             <ul class="goods-list yui3-g" v-for="(cart, i) in carts" :key="i">
                                 <li class="yui3-u-1-24">
-                                    <input type="checkbox" name="" value="" />
+                                    <input type="checkbox" name="" v-model="selected" :value="cart" />
                                 </li>
                                 <li class="yui3-u-11-24">
                                     <div class="good-item">
@@ -70,7 +70,7 @@
                                 </li>
                                 <li class="yui3-u-1-8"><span style="line-height:70px " class="sum">{{ly.formatPrice(cart.price * cart.num)}}</span></li>
                                 <li class="yui3-u-1-8">
-                                    <a href="#none">删除</a><br />
+                                    <a href="javascript:void(0)" @click="deleteCart(i)">删除</a><br />
                                     <a href="#none">移到我的关注</a>
                                 </li>
                             </ul>
@@ -90,9 +90,9 @@
                     <a href="#none">清除下柜商品</a>
                 </div>
                 <div class="toolbar">
-                    <div class="chosed">已选择<span>0</span>件商品</div>
+                    <div class="chosed">已选择<span>{{selected.length}}</span>件商品</div>
                     <div class="sumprice">
-                        <span><em>总价（不含运费） ：</em><i class="summoney">8848.00</i></span>
+                        <span><em>总价（不含运费） ：</em><i class="summoney">{{totalPrice}}</i></span>
                         <span><em>已节省：</em><i>-¥20.00</i></span>
                     </div>
                     <div class="sumbtn">
@@ -269,13 +269,19 @@
         el: "#cartApp",
         data: {
             ly,
-            carts: []
+            carts: [],
+            selected: []
         },
         created() {
             this.loadCarts();
         },
         components: {
             shortcut: () => import("/js/pages/shortcut.js")
+        },
+        computed: {
+            totalPrice() {
+                return ly.formatPrice(this.selected.reduce((c1, c2) => c1 + c2.num * c2.price, 0));
+            }
         },
         methods: {
             /**
@@ -316,6 +322,18 @@
                     // TODO 已登录，向后台发起请求
                 }).catch(() => {
                     // 未登录，直接操作本地数据
+                    ly.store.set("carts", this.carts);
+                })
+            },
+            /**
+             * 删除购物车中商品
+             */ 
+            deleteCart(i) {
+                ly.verifyUser().then(res=>{
+                    // TODO，已登录购物车
+                }).catch(()=>{
+                    // 未登录购物车
+                    this.carts.splice(i, 1);
                     ly.store.set("carts", this.carts);
                 })
             }

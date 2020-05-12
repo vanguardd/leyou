@@ -214,7 +214,7 @@
                                 <i class="command">已有2000人评价</i>
                             </div>
                             <div class="operate">
-                                <a href="success-cart.html" target="_blank" class="sui-btn btn-bordered btn-danger">加入购物车</a>
+                                <a href="javascript:void(0);" @click="addCart(goods.selected, goods.id)" class="sui-btn btn-bordered btn-danger">加入购物车</a>
                                 <a href="javascript:void(0);" class="sui-btn btn-bordered">对比</a>
                                 <a href="javascript:void(0);" class="sui-btn btn-bordered">关注</a>
                             </div>
@@ -496,6 +496,42 @@
              */ 
             removeFilter(k) {
                 this.search.filter[k] = null;
+            },
+            /**
+             * 添加购物车
+             */ 
+            addCart(s, goodId) {
+                ly.verifyUser().then(res=>{
+					// 已登录发送信息到后台，保存到redis中
+
+				}).catch(()=>{
+					// 未登录保存在浏览器本地的localStorage中
+					// 1. 查询本地购物车
+					let carts = ly.store.get("carts") || [];
+					let cart = carts.find(c => c.skuId === s.id);
+
+					// 2. 判断当前商品是否已经加入本地购物车
+					if(cart) {
+						// 3. 已经存在，商品数量相加并更新
+						cart.num += 1;
+					} else {
+						// 4. 不存在，新增本地购物车
+						cart = {
+							skuId: s.id,
+							title: s.title,
+							price: s.price,
+							image: s.image,
+                            num: 1,
+                            ownSpec: s.ownSpec,
+                            goodId: goodId
+						}
+						carts.push(cart);
+					}
+					// 将carts写回到localStorage
+					ly.store.set("carts", carts);
+					// 跳转到购物车页面
+					window.location.href = "http://www.leyou.com/cart.html";
+				}) 
             }
         }
     });

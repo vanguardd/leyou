@@ -66,6 +66,7 @@ public class IndexService {
             skuMap.put("title", sku.getTitle());
             skuMap.put("price", sku.getPrice());
             skuMap.put("image", StringUtils.isNotBlank(sku.getImages()) ? StringUtils.split(sku.getImages(), ",")[0] : "");
+            skuMap.put("ownSpec", sku.getOwnSpec());
             skuMapList.add(skuMap);
         });
 

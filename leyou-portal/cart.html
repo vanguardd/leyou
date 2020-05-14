@@ -79,7 +79,7 @@
                 </div>
 
             </div>
-            <div class="cart-tool">
+            <div class="cart-tool" v-show="carts.length != 0">
                 <div class="select-all">
                     <input type="checkbox" name="" id="" value=""/>
                     <span>全选</span>
@@ -102,17 +102,17 @@
             </div>
             <div class="clearfix"></div>
             <div class="deled">
-                <span>已删除商品，您可以重新购买或加关注：</span>
+                <span v-show="deleteCarts.length != 0">已删除商品，您可以重新购买或加关注：</span>
                 <div class="cart-list del">
-                    <ul class="goods-list yui3-g">
+                    <ul class="goods-list yui3-g" v-for="(cart, i) in deleteCarts" :key="i">
                         <li class="yui3-u-1-2">
                             <div class="good-item">
-                                <div class="item-msg">Apple Macbook Air 13.3英寸笔记本电脑 银色（Corei5）处理器/8GB内存</div>
+                                <div class="item-msg">{{cart.title}}</div>
                             </div>
                         </li>
-                        <li class="yui3-u-1-6"><span class="price">8848.00</span></li>
+                        <li class="yui3-u-1-6"><span class="price">{{ly.formatPrice(cart.price * cart.num)}}</span></li>
                         <li class="yui3-u-1-6">
-                            <span class="number">1</span>
+                            <span class="number">{{cart.num}}</span>
                         </li>
                         <li class="yui3-u-1-8">
                             <a href="#none">重新购买</a>
@@ -270,7 +270,8 @@
         data: {
             ly,
             carts: [],
-            selected: []
+            selected: [],
+            deleteCarts: []
         },
         created() {
             this.loadCarts();
@@ -303,6 +304,9 @@
                     this.carts = ly.store.get("carts") || [];
                     this.selected = this.carts;
                 })
+
+                //获取已删除的购物车商品
+                this.deleteCarts = ly.store.get("deleteCarts") || [];
             },
             increment(c) {
                 c.num++;
@@ -329,6 +333,12 @@
              * 删除购物车中商品
              */ 
             deleteCart(i) {
+                //将删除的购物车商品添加到已删除商品
+                let deleteCarts = ly.store.get("deleteCarts") || [];
+                deleteCarts.push(this.carts[i]);
+                ly.store.set("deleteCarts", deleteCarts);
+
+                //删除购物车商品
                 ly.verifyUser().then(res=>{
                     // TODO，已登录购物车
                 }).catch(()=>{

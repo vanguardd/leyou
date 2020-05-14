@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 @EnableConfigurationProperties(JwtProperties.class)
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
-    private JwtProperties jwtProperties;
+    private final JwtProperties jwtProperties;
 
     public LoginInterceptor(JwtProperties jwtProperties) {
         this.jwtProperties = jwtProperties;

@@ -51,11 +51,11 @@
                                 <li class="yui3-u-11-24">
                                     <div class="good-item">
                                         <div class="item-img">
-                                            <a :href="'item/' +cart.goodId+'.html'" target="_blank"><img :src="cart.image" width="80px" height="80px"/></a>
+                                            <a :href="'item/' +cart.spuId+'.html'" target="_blank"><img :src="cart.image" width="80px" height="80px"/></a>
                                         </div>
                                         <div class="item-msg">
 												<span>
-                                                    <a :href="'item/' +cart.goodId+'.html'" target="_blank">{{cart.title}}</a><br/>
+                                                    <a :href="'item/' +cart.spuId+'.html'" target="_blank">{{cart.title}}</a><br/>
                                                     <span v-for="(v, k) in JSON.parse(cart.ownSpec)" :key="k">{{v}}<br/></span>
 												</span>
                                         </div>
@@ -115,7 +115,7 @@
                             <span class="number">{{cart.num}}</span>
                         </li>
                         <li class="yui3-u-1-8">
-                            <a href="#none">重新购买</a>
+                            <a :href="'item/' +cart.spuId+'.html'">重新购买</a>
                             <a href="#none">移到我的关注</a>
                         </li>
                     </ul>
@@ -295,13 +295,33 @@
              * 加载购物车信息
              */ 
             loadCarts() {
+                this.carts = ly.store.get("carts") || [];
                 // 先判断登录状态
                 ly.verifyUser().then(() => {
-                        // 已登录
+                    // 已登录
+                    // 判断localStorage中是否有购物车商品信息
+                    if(this.carts.length > 0) {
+                        // 有购物车商品信息时，将商品信息保存到后台
+                        // for(let cart of this.carts) {
+                        //     ly.http.post("/cart", cart);
+                        // }
+                        ly.http.post("/cart/list", this.carts).then(res => {
+                            // 清除localStorage
+                            ly.store.del("carts");
+                            // 重新加载购物车商品信息
+                            ly.http.get("/cart").then(({data}) => {
+                                this.carts = data;
+                                this.selected = data;
+                            })
+                        })
+                    }
+                    ly.http.get("/cart").then(({data}) => {
+                        this.carts = data;
+                        this.selected = data;
+                    })
 
                 }).catch(() => {
                     // 未登录
-                    this.carts = ly.store.get("carts") || [];
                     this.selected = this.carts;
                 })
 
@@ -311,7 +331,8 @@
             increment(c) {
                 c.num++;
                 ly.verifyUser().then(() => {
-                    // TODO 已登录，向后台发起请求
+                    // 已登录，向后台发起请求
+                    ly.http.put("/cart", { skuId: c.skuId, num: c.num });
                 }).catch(() => {
                     // 未登录，直接操作本地数据
                     ly.store.set("carts", this.carts);
@@ -323,7 +344,8 @@
                 }
                 c.num--;
                 ly.verifyUser().then(() => {
-                    // TODO 已登录，向后台发起请求
+                    // 已登录，向后台发起请求
+                    ly.http.put("/cart", { skuId: c.skuId, num: c.num });
                 }).catch(() => {
                     // 未登录，直接操作本地数据
                     ly.store.set("carts", this.carts);
@@ -335,12 +357,26 @@
             deleteCart(i) {
                 //将删除的购物车商品添加到已删除商品
                 let deleteCarts = ly.store.get("deleteCarts") || [];
-                deleteCarts.push(this.carts[i]);
+                let deleteCart = deleteCarts.find(c => c.skuId === this.carts[i].skuId);
+                // 判断当前删除的商品是否已经加入删除购物车商品信息列表
+                if(deleteCart) {
+                    // 已经存在，更新数量
+                    deleteCart.num += this.carts[i].num;
+                } else {
+                    // 不存在，新增到本地
+                    deleteCart = this.carts[i];
+                    deleteCarts.push(deleteCart);
+                }
+                
                 ly.store.set("deleteCarts", deleteCarts);
+                this.deleteCarts = deleteCarts;
 
                 //删除购物车商品
                 ly.verifyUser().then(res=>{
-                    // TODO，已登录购物车
+                    // 已登录购物车
+                    ly.http.delete("/cart/" + this.carts[i].skuId).then(res => {
+                        this.carts.splice(i, 1);
+                    })
                 }).catch(()=>{
                     // 未登录购物车
                     this.carts.splice(i, 1);

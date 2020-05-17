@@ -38,7 +38,7 @@ const lyTop = {
                                 <span class='car'></span> \
                                 <a class='sui-btn btn-default btn-xlarge' href='cart.html' target='_blank'> \
                                     <span>我的购物车</span> \
-                                    <i class='shopnum'>0</i> \
+                                    <i class='shopnum'>{{cartNum}}</i> \
                                 </a> \
                                 <div class='clearfix shopcarlist' id='shopcarlist' style='display:none'> \
                                     <p>'啊哦，你的购物车还没有商品哦！'</p> \
@@ -74,7 +74,8 @@ const lyTop = {
     data() {
         return {
             key: "",
-            query: location.search
+            query: location.search,
+            cartNum: 0 //购物车商品数量
         }
     },
     methods: {
@@ -94,6 +95,19 @@ const lyTop = {
     },
     created() {
         this.key = this.getUrlParam("key");
+
+        // 读取购物车商品数量
+        ly.verifyUser().then(res => {
+            // 已登录，查询购物车商品数量
+            ly.http.get("/cart/count").then(({data}) => {
+                this.cartNum = data;
+            })
+        }).catch(() => {
+            // 未登录，查询localStorage中购物车商品数量
+            let carts = ly.store.get("carts") || [];
+            this.cartNum = carts.length;
+        })
+        
     },
     components: {
         shortcut:() => import('./shortcut.js')

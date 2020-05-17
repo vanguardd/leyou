@@ -271,4 +271,19 @@ public class GoodsService {
             log.error("{}商品消息发送异常，商品id{}", type, id, e);
         }
     }
+
+    /**
+     * 根据id查询Sku
+     * @param skuId
+     * @return com.leyou.item.pojo.Sku
+     * @author vanguard
+     * @date 20/5/17 17:22
+     */
+    public Sku getSkuById(Long skuId) {
+        Sku sku = skuMapper.selectByPrimaryKey(skuId);
+        if(sku == null) {
+            throw new LyException(ExceptionEnums.GOODS_NOT_FOUND);
+        }
+        return sku;
+    }
 }

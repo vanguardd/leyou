@@ -68,4 +68,14 @@ public interface GoodsApi {
      */
     @GetMapping("spu/{id}")
     Spu getSpuById(@PathVariable("id") Long id);
+
+    /**
+     * 根据id查询sku
+     * @param id
+     * @return org.springframework.http.ResponseEntity<com.leyou.item.pojo.Sku>
+     * @author vanguard
+     * @date 20/5/17 16:59
+     */
+    @GetMapping("sku/{id}")
+    Sku getSkuById(@PathVariable("id") Long id);
 }

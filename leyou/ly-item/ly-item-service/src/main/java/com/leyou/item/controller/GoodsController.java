@@ -111,4 +111,17 @@ public class GoodsController {
         Spu spu = goodsService.getSpuById(id);
         return ResponseEntity.ok(spu);
     }
+
+    /**
+     * 根据id查询sku
+     * @param id
+     * @return org.springframework.http.ResponseEntity<com.leyou.item.pojo.Sku>
+     * @author vanguard
+     * @date 20/5/17 16:59
+     */
+    @GetMapping("sku/{id}")
+    public ResponseEntity<Sku> getSkuById(@PathVariable("id") Long id) {
+        Sku sku = goodsService.getSkuById(id);
+        return ResponseEntity.ok(sku);
+    }
 }

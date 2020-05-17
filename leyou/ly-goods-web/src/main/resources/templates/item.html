@@ -667,7 +667,9 @@
 			addCart() {
 				ly.verifyUser().then(res=>{
 					// 已登录发送信息到后台，保存到redis中
-
+					ly.http.post("/cart", { skuId: this.sku.id, num: this.num }).then(res => {
+						window.location.href = "http://www.leyou.com/cart.html";
+					})
 				}).catch(()=>{
 					// 未登录保存在浏览器本地的localStorage中
 					// 1. 查询本地购物车
@@ -687,7 +689,7 @@
 							image: this.sku.images,
 							num: this.num,
 							ownSpec: this.sku.ownSpec,
-							goodId: this.sku.spuId
+							spuId: this.sku.spuId
 						}
 						carts.push(cart);
 					}

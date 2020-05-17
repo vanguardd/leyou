@@ -32,6 +32,7 @@ public enum  ExceptionEnums {
     GOODS_NOT_FOUND(404, "商品不存在！"),
     GOODS_DETAIL_NOT_FOUND(404, "商品详情不存在！"),
     GOODS_SKU_NOT_FOUND(404, "商品sku不存在！"),
+    CART_NOT_FOUND(404, "购物车商品信息不存在！"),
     BRAND_INSERT_ERROR(500, "新增品牌失败！"),
     UPLOAD_FILE_ERROR(500, "上传文件失败！"),
     GOODS_SAVE_ERROR(500, "商品保存失败！"),

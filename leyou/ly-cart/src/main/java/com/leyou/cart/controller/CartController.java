@@ -28,14 +28,14 @@ public class CartController {
      * @author vanguard
      * @date 20/5/17 21:55
      */
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<Void> addCart(@RequestBody Cart cart) {
         cartService.addCart(cart);
         return ResponseEntity.ok().build();
     }
 
     /**
-     * 新增购物车商品结婚
+     * 新增购物车商品集合
      * @param cartList
      * @return org.springframework.http.ResponseEntity<java.lang.Void>
      * @author vanguard
@@ -55,7 +55,7 @@ public class CartController {
      * @author vanguard
      * @date 20/5/17 21:55
      */
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<List<Cart>> getCarts() {
         List<Cart> carts = cartService.getCarts();
         return ResponseEntity.ok(carts);
@@ -68,7 +68,7 @@ public class CartController {
      * @author vanguard
      * @date 20/5/17 21:56
      */
-    @PutMapping("")
+    @PutMapping
     public ResponseEntity<Void> updateCart(@RequestBody Cart cart) {
         cartService.updateCart(cart);
         return ResponseEntity.ok().build();

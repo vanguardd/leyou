@@ -1,6 +1,6 @@
 package com.leyou.search.client;
 
-import com.leyou.LySearchService;
+import com.leyou.LySearchApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import java.util.List;
  * @Date: 2020/04/18
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = LySearchService.class)
+@SpringBootTest(classes = LySearchApplication.class)
 public class CategoryClientTest {
 
     @Autowired

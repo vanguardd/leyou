@@ -1,6 +1,6 @@
 package com.leyou.search.client;
 
-import com.leyou.LySearchService;
+import com.leyou.LySearchApplication;
 import com.leyou.common.vo.PageResult;
 import com.leyou.item.pojo.Spu;
 import com.leyou.search.pojo.Goods;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = LySearchService.class)
+@SpringBootTest(classes = LySearchApplication.class)
 public class ElasticsearchTest {
 
     @Autowired

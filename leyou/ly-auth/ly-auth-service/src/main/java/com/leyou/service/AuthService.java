@@ -5,7 +5,7 @@ import com.leyou.auth.utils.JwtUtils;
 import com.leyou.client.UserClient;
 import com.leyou.common.enums.ExceptionEnums;
 import com.leyou.common.exception.LyException;
-import com.leyou.config.JwtProperties;
+import com.leyou.order.config.JwtProperties;
 import com.leyou.user.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

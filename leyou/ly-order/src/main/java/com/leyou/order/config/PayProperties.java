@@ -1,4 +1,4 @@
-package com.leyou.config;
+package com.leyou.order.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

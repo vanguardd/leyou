@@ -1,4 +1,4 @@
-package com.leyou.config;
+package com.leyou.order.config;
 
 import com.github.wxpay.sdk.WXPayConfig;
 import org.springframework.beans.factory.annotation.Autowired;

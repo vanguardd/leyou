@@ -1,6 +1,6 @@
 package com.leyou.user;
 
-import com.leyou.LyUserService;
+import com.leyou.LyUserApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = LyUserService.class)
+@SpringBootTest(classes = LyUserApplication.class)
 public class RedisTest {
 
     @Autowired

@@ -11,8 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Date: 2020/05/05
  */
 @SpringBootApplication
-public class LySmsService {
+public class LySmsApplication {
     public static void main(String[] args) {
-        SpringApplication.run(LySmsService.class);
+        SpringApplication.run(LySmsApplication.class);
     }
 }

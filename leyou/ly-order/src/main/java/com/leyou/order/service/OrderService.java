@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.leyou.auth.entity.UserInfo;
 import com.leyou.common.utils.IdWorker;
 import com.leyou.common.vo.PageResult;
+import com.leyou.order.enums.OrderStatusEnum;
 import com.leyou.order.interceptor.LoginInterceptor;
 import com.leyou.order.mapper.OrderDetailMapper;
 import com.leyou.order.mapper.OrderMapper;
@@ -57,7 +58,8 @@ public class OrderService {
         OrderStatus orderStatus = new OrderStatus();
         orderStatus.setOrderId(orderId);
         orderStatus.setCreateTime(order.getCreateTime());
-        orderStatus.setStatus(1);// 初始状态为未付款
+        // 初始状态为未付款
+        orderStatus.setStatus(OrderStatusEnum.UN_PAY.value());
 
         this.statusMapper.insertSelective(orderStatus);
 

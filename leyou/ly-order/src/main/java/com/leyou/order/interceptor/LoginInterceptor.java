@@ -3,7 +3,7 @@ package com.leyou.order.interceptor;
 import com.leyou.auth.entity.UserInfo;
 import com.leyou.auth.utils.JwtUtils;
 import com.leyou.common.utils.CookieUtils;
-import com.leyou.config.JwtProperties;
+import com.leyou.order.config.JwtProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;

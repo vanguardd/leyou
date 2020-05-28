@@ -2,19 +2,19 @@ package com.leyou;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
-import org.springframework.cloud.openfeign.EnableFeignClients;
+import tk.mybatis.spring.annotation.MapperScan;
 
 /**
- * @Title: 购物车服务启动类
+ * @Title: 商品服务启动类
  * @Description:
  * @Author: vanguard
  * @Version: 1.0
- * @Date: 2020/05/11
+ * @Date: 2019/09/24
  */
-@EnableFeignClients
 @SpringCloudApplication
-public class LyCartService {
+@MapperScan("com.leyou.item.mapper")
+public class LyItemApplication {
     public static void main(String[] args) {
-        SpringApplication.run(LyCartService.class, args);
+        SpringApplication.run(LyItemApplication.class, args);
     }
 }

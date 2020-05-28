@@ -2,22 +2,19 @@ package com.leyou;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
- * @Title: 授权服务启动类
+ * @Title:
  * @Description:
  * @Author: vanguard
  * @Version: 1.0
- * @Date: 2020/05/08
+ * @Date: 2019/11/18
  */
-@EnableFeignClients
-@SpringCloudApplication
-public class LyAuthService {
-
+@SpringBootApplication
+@EnableDiscoveryClient
+public class LyUploadApplication {
     public static void main(String[] args) {
-        SpringApplication.run(LyAuthService.class, args);
+        SpringApplication.run(LyUploadApplication.class);
     }
 }

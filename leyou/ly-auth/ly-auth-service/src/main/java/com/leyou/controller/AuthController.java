@@ -5,7 +5,7 @@ import com.leyou.auth.utils.JwtUtils;
 import com.leyou.common.enums.ExceptionEnums;
 import com.leyou.common.exception.LyException;
 import com.leyou.common.utils.CookieUtils;
-import com.leyou.config.JwtProperties;
+import com.leyou.order.config.JwtProperties;
 import com.leyou.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

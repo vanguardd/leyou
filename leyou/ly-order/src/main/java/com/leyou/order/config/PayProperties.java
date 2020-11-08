@@ -2,7 +2,7 @@ package com.leyou.order.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "leyou.pay")
+@ConfigurationProperties(prefix = "ly.pay")
 public class PayProperties {
 
     private String appId; // 公众账号ID

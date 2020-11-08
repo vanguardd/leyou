@@ -52,7 +52,7 @@ mybatis:
 mapper:
   not-empty: false
   identity: mysql
-leyou:
+ly:
   worker:
     workerId: 1
     datacenterId: 1

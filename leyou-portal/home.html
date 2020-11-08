@@ -299,6 +299,7 @@
     var vm = new Vue({
         el: "#account",
         data: {
+            ly,
             user: {},
             orders:[],
             query:{
@@ -308,23 +309,16 @@
             }
         },
         created() {
-            const token = Cookies.get("LY_TOKEN");
-            if (token) {
-                // 有token，曾经登录过，查询用户信息
-                leyou.http.get("/user/" + token)
-                    .then(resp => {
-                        this.user = resp.data;
-                        // 查询订单信息
-                        this.loadOrder();
-                    })
-                    .catch(() => {
-                        // 去登录
-                        this.gotoLogin();
-                    });
-            } else {
+            // 查询用户是否登录
+            ly.verifyUser().then(resp => {
+                this.user = resp.data;
+                // 查询订单信息
+                this.loadOrder();
+            }).catch(() => {
                 // 去登录
                 this.gotoLogin();
-            }
+            });
+           
         },
         methods: {
             logout() {

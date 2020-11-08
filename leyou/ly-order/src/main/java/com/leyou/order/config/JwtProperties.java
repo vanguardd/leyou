@@ -8,12 +8,18 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import javax.annotation.PostConstruct;
 import java.security.PublicKey;
 
-@ConfigurationProperties(prefix = "leyou.jwt")
+@ConfigurationProperties(prefix = "ly.jwt")
 public class JwtProperties {
 
-    private String pubKeyPath;// 公钥
+    /**
+     * 公钥路径
+     */
+    private String pubKeyPath;
 
-    private PublicKey publicKey; // 公钥
+    /**
+     * 公钥key
+     */
+    private PublicKey publicKey;
 
     private String cookieName;
 
